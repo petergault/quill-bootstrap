@@ -1,17 +1,80 @@
+/* ==========================================================================
+   Font embedding
+   ========================================================================== */
+
+
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:700,400,300,600);
 
-//Tags
 
+
+
+/* ==========================================================================
+   Tags
+   ========================================================================== */
+
+// Resetting the margins and paddings on p, h1, h2, etc
 p, h1, h2, h3, h4, h5, h6 {
 	padding: 0;
 	margin: 0;
 }
 
+// Resetting the outline
+
+
 section {
 	.section-mixin();
 }
 
-//Navbar styles
+//Buttons
+
+button:not(.select-mixin) {
+	.button-mixin();
+	.transition-mixin();
+	&:focus {
+		outline: none;
+	}
+	&:active {
+		box-shadow: inset 0 0 6px 0 rgba(0, 0, 0, 0.7);
+	}
+	border: 0;
+	font-weight: bold;
+}
+
+.button-select {
+	text-align: left;
+	width: 100%;
+}
+
+.button-gray {
+	background-color: @button-gray-bg;
+	color: #fff;
+
+	&:hover {
+		background-color: darken(@button-gray-bg, 7%)
+	}
+}
+
+.button-green {
+	background-color: @green-color;
+	color: #fff;
+
+	&:hover {
+		background-color: darken(@green-color, 7%)
+	}
+}
+
+.button-orange {
+	background-color: #f99f3e;
+
+	&:hover {
+		background-color: darken(#f99f3e, 7%);
+	}
+}
+
+/* ==========================================================================
+   Navbar styles
+   ========================================================================== */
+
 
 //Brand img
 
@@ -24,7 +87,7 @@ section {
 .navbar-default .navbar-nav > li > a {
 	color: #000;
 	font-size: @nav-a-font-size;
-	line-height: @logo-height;
+	line-height: @logo-height + 5;
 	padding: @nav-a-padding;
 	font-weight: 500;
 	border-top: none;
@@ -35,31 +98,156 @@ section {
 	}
 }
 
+//Fixing hover on navbar anchors so as they dont have the same border as tabs anchors
+
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
 	border-top: none;
 }
 
+.navbar-default {
+	.navbar-nav {
+		position: relative;
+		left: 30px;
+	}
+}
 
-//Page content styles
+
+/* ==========================================================================
+   Inputs, selects, etc
+   ========================================================================== */
+input {
+	.input-mixin();
+	.transition-mixin();
+
+	&:focus {
+		outline: none;
+		border: 1px solid @green-color;
+	}
+}
+
+.datepicker-input {
+	height: 26px;
+	width: 148px;
+	background-image: url(../images/icon-calendar.png);
+	background-repeat: no-repeat;
+	background-position-x: 120px;
+	background-position-y: 3px;
+}
+
+input.inactive {
+	background: @thead-bg;
+	width: 120px;
+	border: 1px dashed @border-color;
+
+	&:focus {
+		border: 1px dashed @green-color;
+	}
+}
+
 
 select {
 	.select-mixin();
+
+	&:focus {
+		outline: none;
+	}
+}
+
+.button-select-wrapper {
+	button {
+		.select-mixin();
+		text-align: left;
+		width: 100%;
+	}
+	
+	.dropdown-menu {
+		list-style-type: none;
+		padding: 0;
+		margin: 0;
+		width: 100%;
+		border-radius: 5px;
+		font-size: 14px;
+
+		a {
+			padding: 5px 14px;
+			display: block;
+			color: #000;
+
+			&:hover {
+				background: #f0f0f0;
+			}
+
+			&:hover, &:focus, &:active {
+				-webkit-appearance: none;
+			}
+		}
+	}
+
+	a:hover {
+		text-decoration: none;
+	}
+
+	.fa {
+		color: #737373;
+		position: relative;	
+		float: right;
+		font-size: 1.3em;
+		text-align: right;
+		line-height: normal;
+		width: auto;
+	}
+}
+
+.select-white-wrapper {
+	.dropdown-menu {
+		width: 265px;
+	}
+}
+
+.select-gray-wrapper {
+	.dropdown-menu {
+		width: 100% !important;
+	}
+}
+
+
+
+
+.select-box-disabled {
+	background: @select-gray-bg;
+}
+
+.select-white-wrapper {
+	width: 280px;
 }
 
 .select-white {
 	background: #fff;
 }
 
+.select-gray-wrapper {
+	width: 220px;
+}
+
 .select-gray {
 	background: @select-gray-bg;
 }
 
-.section-content-wrapper {
-	.section-mixin();
+.select-box-trigger {
+	padding: 13px 40px;
+	width: 284px;
+	display: block;
+	position: relative;
+	right: 20px;
 }
 
-//Tabs
+
+
+/* ==========================================================================
+   Tabs
+   ========================================================================== */
+
 
 .tabs-navigation-list {
 	li {
@@ -77,12 +265,10 @@ select {
 	border-left: 1px solid #cecece;
 }
 
-
-
 //Subnavigation list
 
 .tab-subnavigation-wrapper {
-	padding: 10px 0;
+	padding: 8px 0;
 	background: #fff;
 	border-bottom: 1px solid @border-color;
 	border-top: 1px solid @border-color;
@@ -111,8 +297,69 @@ select {
 }
 
 
-//Icons
+.student-subnavigation {
+	padding: 12px 0;
 
+	a {
+		font-size: 14px;
+		color: #999;
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
+
+	span {
+		line-height: 24px;
+	}
+
+	img {
+		margin-right: 9px;
+	}
+}
+
+.student-course-info {
+	a {
+		margin-right: 50px;
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}	
+
+.tab-subnavigation-breadcrumb-wrapper {
+	padding: 8px 0;
+	background: #fff;
+	border-bottom: 1px solid @border-color;
+	border-top: 1px solid @border-color;
+
+	ul {
+		.ul-reset-mixin();
+		float: left;
+
+		li {
+			float: left;
+
+			a {
+				font-size: @tab-subnavigation-a-font-size;
+			}
+
+			a.active {
+				
+			}
+
+		}
+	}
+}
+
+
+/* ==========================================================================
+   Icons
+   ========================================================================== */
+
+
+//Wrappers
 .icons-wrapper {
 	padding-top: @content-padding-no-sides;
 }
@@ -122,22 +369,28 @@ select {
 	float: left;
 }
 
+
+//Icon rows
+
 .icon-row {
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 	.icon-wrapper {
-		margin-right: 20px;
+		margin-right: 17px;
 		float: none;
 		display: inline-block;
 	}
 }
 
-.icon-first-row {
+.icon-row:first-child {
 	margin-top: 26px;
 }
 
-.icon-last-row {
+.icon-row:last-child {
 	margin-bottom: 0;
 }
+
+
+//Background color for icon wrappers
 
 .icon-green {
 	background: @icon-green-bg;
@@ -155,23 +408,24 @@ select {
 	background: @icon-gray-bg;
 }
 
+//Background image for icon wrappers
+
 .icon-pencil {
 	background-image: url(../images/icon-pencil.png);
 	background-repeat: no-repeat;
-	background-position: 5px;	
+	background-position: 9px;	
 }
 
 .icon-puzzle {
 	background-image: url(../images/icon-puzzle.png);
 	background-repeat: no-repeat;
-	background-position-x: 7px;	
-	background-position-y: 4px;	
+	background-position: 11px 7px;
 }
 
 .icon-flag {
 	background-image: url(../images/icon-flag.png);
 	background-repeat: no-repeat;
-	background-position: 5px;
+	background-position: 9px;
 }
 
 
@@ -180,7 +434,6 @@ select {
 .icons-description-wrapper {
 	float: left;
 	position: relative;
-	bottom: 2px;
 	margin-left: 10px;
 }
 
@@ -188,8 +441,12 @@ select {
 	font-size: 14px;
 }
 
+.title-v-centered {
+	line-height: @icon-size;
+}
+
 .title-not-started {
-	line-height: 33px;
+	line-height: @icon-size;
 	position: static;
 }
 
@@ -200,30 +457,1291 @@ select {
 .how-we-grade {
 	float: right;
 
+	&:hover {
+		.fa {
+			color: #747474;
+		}
+
+	}
+
 	.fa {
 		color: @border-color;
 		margin-left: 10px;
-
-		&:hover {
-			color: #747474;
-		}
 	}
 }
 
-.student-name {
+.section-header {
 	font-weight: 600;
 	font-size: 24px;
 }
 
-//Tooltips
+
+/* ==========================================================================
+   HOME PAGE
+   ========================================================================== */
+
+.home-page-navbar {
+	margin: 0;
+	background-color: #3b3b3b;
+	height: 70px;
+
+	.navbar-brand {
+		padding: 13px 0 0 14px;
+	}
+
+	.navbar-toggle {
+		margin-top: 19px;
+		.icon-bar {
+			background-color: #fff;
+		}
+	}
+
+	.home-navbar-list {
+		float: right;
+		list-style-type: none;
+
+		li {
+			float: left;
+			position: relative;
+			display: block;
+
+			&:hover {
+				background-color: darken(#3b3b3b, 10%);
+			}
+
+			a {
+				padding: 25px 15px;
+				position: relative;
+				display: block;
+				line-height: 20px;
+				color: #fff;
+				font-style: 14px;
+
+				&:hover {
+					text-decoration: none;
+				}
+			}
+		}
+
+		.button-anchor {
+			&:hover {
+				background-color: #3b3b3b;
+
+				button {
+					box-shadow: 0 0 0.3rem rgba(0,0,0,0.4);
+				}
+			}
+
+			a {
+				padding: 16px 15px;
+			}
+
+			button {
+				padding: 8px;
+				position: relative;
+				top: 2px;
+			}
+
+			.button-grey {
+				color: #000;
+			}
+		}
+	}
+
+	@media screen and (max-width: 992px) {
+		#home-collapsed-navbar {
+			border-top: none !important;
+			margin-top: 0;
+			box-shadow: none;
+			position: absolute;
+			left: 0;
+			right: 0;
+			overflow-y: hidden;
+			
+		}
+
+		.home-navbar-list {
+			float: none;
+			background-color: #3b3b3b;
+			border-top: none;
+			padding-left: 0;
+
+			li {
+				float: none;
+				
+
+				a {
+					padding: 5px !important;
+				}
+			}
+		}
+	}
+}
+
+#home-page {
+	section {
+		padding: 35px 200px;
+		text-align: center;
+		h1 {
+			margin-bottom: 17px;
+		}
+
+		p {
+			margin-bottom: 17px;
+		}
+	}
+	background-color: #f7f5f5;
+	.hero {
+		background-image: url(../images/home-hero.png);
+		background-size: cover;
+		background-repeat: no-repeat;
+		color: #fff;
+
+		.hero-content {
+			padding: 94px 0;
+			text-align: center;
+		}
+
+		h1 {
+			font-size: 28px;
+			font-weight: bold;
+			margin-bottom: 20px;
+		}
+
+		p {
+			font-size: 16px;
+			margin-bottom: 35px;
+		}
+	}
+
+	.stats {
+		
+		background-color: #5cc2aa;
+		padding: 25px 0;
+		margin-left: 0;
+		margin-right: 0;
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+		color: #fff;
+
+		.stat {
+			text-align: center;
+		}
+
+		@media screen and (max-width: @screen-md) {
+			.stat {
+				margin-top: 20px;
+			}
+		}
+
+		.stats-number {
+			font-size: 24px;
+		}
+
+		.stats-description {
+			font-size: 14px;
+		}
+	}
+
+	.apps {
+		margin: 70px auto 30px auto;
+		
+
+		.app {
+			position: relative;
+
+			a {
+				.button-mixin();
+				.transition-mixin();
+
+				&:focus {
+					outline: none;
+				}
+				&:active {
+					box-shadow: inset 0 0 6px 0 rgba(0, 0, 0, 0.7);
+				}
+				border: 0;
+				font-weight: bold;
+				position: absolute;
+				left: 0;
+				right: 0;
+				margin: 0 auto;
+				bottom: 25px;
+				width: 130px;
+
+				&:hover {
+					text-decoration: none;
+					color: #fff;
+				}
+			}
+
+
+			.icon-top {
+				position: absolute;
+				top: -40px;
+				width: 80px;
+				height: 77px;
+				border-radius: 5px;
+				border: 1px solid @border-color;
+				background-color: #fff;
+				margin: 0 auto;
+				left: 0;
+				right: 0;
+				z-index: 1;
+				background-repeat: no-repeat;
+				background-position: center;
+
+				&.icon-big-grammar {
+					background-image: url(../images/icons/grammar.png);
+
+				}
+
+				&.icon-big-writer {
+					background-image: url(../images/icons/writer.png);
+
+				}
+
+				&.icon-big-proofreader {
+					background-image: url(../images/icons/proofreader.png);
+
+				}
+
+				&.icon-big-shuffle {
+					background-image: url(../images/icons/shuffle.png);
+
+				}
+			}
+
+			.app-inner {
+				padding-left: 10px;
+				padding-right: 10px;
+				padding-top: 55px;
+				padding-bottom: 40px;
+				border: 1px solid @border-color;
+				position: relative;
+				min-height: 322px;
+				border-radius: 5px;
+				background-color: #fff;
+
+				.coming-soon {
+					position: absolute;
+					bottom: 25px;
+					line-height: 40px;
+					left: 0;
+					right: 0;
+					margin: 0 auto;
+					width: 152px;
+				}
+			}
+
+			h1 {
+				font-size: 22px;
+				margin-bottom: 17px;
+				text-align: center;
+			}
+
+			p {
+				font-size: 14px;
+				text-align: center;
+			}
+		}
+
+		@media screen and (max-width: @screen-md) {
+			.app {
+				margin-top: 70px;
+			}
+		}
+	}
+
+	.teacher-stories {
+		background-color: #5cc2aa;
+		text-align: center;
+		color: #fff;
+		border-radius: 5px;
+
+		.author {
+			margin-bottom: 0;
+			font-size: 12px;
+			color: #2e7c6a;
+		}
+	}
+
+	@media screen and (max-width: @screen-md) {
+		section {
+			padding: 35px 120px;
+		}
+	}
+
+	.built-from {
+		img {
+			margin: 0 auto 15px auto;
+		}
+	}
+}
+
+
+/* ==========================================================================
+   Activity Planner styles
+   ========================================================================== */
+
+#activity-planner {
+	input:not([type="checkbox"]) {
+		width: 326px;
+		margin-top: 20px;
+	}
+
+	button:not(.button-select) {
+		margin-left: 20px;
+		border: none;
+		color: #fff;
+		font-weight: bold;
+		margin-top: 20px;
+	}
+
+	.select-box-trigger {
+		width: auto;
+	}
+
+	.activity-planner-select {
+		display: inline-block;
+		width: auto;
+		margin-right: 18px;
+	}
+
+	.selects-wrapper {
+		margin-top: 20px;
+	}
+}
+
+.activity-page-dropdown-wrapper {
+	margin-top: 20px;
+
+	.dropdown-menu {
+		list-style-type: none;
+		padding: 0;
+		margin: 0;
+		min-width: 94%;
+		border-radius: 5px;
+		font-size: 14px;
+
+		a {
+			padding: 5px 14px;
+			display: block;
+			color: #000;
+
+			&:hover {
+				background: #f0f0f0;
+			}
+
+			&:hover, &:focus, &:active {
+				-webkit-appearance: none;
+			}
+		}
+	}	
+}
+
+.learning-to-use {
+	padding: 30px 0 85px 0;
+}
+
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+#activity-planner {
+	table {
+		margin-top: 20px;
+		border-collapse: separate;
+		margin-bottom: 0;
+		thead {
+			background: @thead-bg;
+			border: 1px solid @border-color;
+			tr {
+				th {
+					border-left: 1px solid @border-color;
+					border-bottom: none;
+					border-top: 1px solid @border-color;
+					cursor: pointer;
+					.transition-mixin();
+
+					.fa {
+						float: right;
+						.fa-caret-mixin();
+					}
+
+					&.active {
+						background: #e6e6e6;
+					}
+				}
+
+				th:nth-child(1) {
+					width: 5%;
+					border-top-left-radius: 5px;
+					text-align: center;
+				}
+
+				th:nth-child(2) {
+					width: 7%;
+				}
+
+				th:nth-child(3) {
+					width: 53%;
+				}
+
+				th:nth-child(4) {
+					width: 15%;
+				}
+
+				th:nth-child(5) {
+					width: 20%;
+					border-top-right-radius: 5px;
+					border-right: 1px solid @border-color;
+				}
+			}
+		}
+
+		tbody {
+			
+			tr:nth-child(3), tr:nth-child(4), tr:nth-child(5), tr:nth-child(8), tr:nth-child(9) {
+				background: @thead-bg;
+			}	
+			tr {
+				background: #fff;
+				td {
+					font-size: 14px;
+					padding: 7px; 
+				}
+				td:nth-child(1) {
+					text-align: center;
+					border-left: 1px solid @border-color;
+				}
+
+				td:nth-child(2) {
+					text-align: center;
+				}
+
+				td:nth-child(3) {
+					text-align: left;
+				}
+
+				td:nth-child(4) {
+					text-align: right;
+				}
+
+				td:nth-child(5) {
+					text-align: left;
+					border-right: 1px solid @border-color;
+				}
+			}
+		}
+	}
+
+	.table > thead > tr > th,
+	.table > tbody > tr > th,
+	.table > tfoot > tr > th,
+	.table > thead > tr > td,
+	.table > tbody > tr > td,
+	.table > tfoot > tr > td {
+		vertical-align: middle;
+	}
+}
+
+.learning-to-use {
+	table {
+		tbody {
+			tr {
+				&:first-child {
+					td:nth-child(1) {
+						border-top-left-radius: 5px;
+					}
+
+					td:nth-child(3) {
+						border-top-right-radius: 5px;
+					}
+				}
+
+				&:last-child {
+					td:nth-child(1) {
+						border-bottom-left-radius: 5px;
+					}
+
+					td:nth-child(3) {
+						border-bottom-right-radius: 5px;
+					}
+				}
+				background: @thead-bg !important;
+				td:nth-child(1) {
+					width: 5%;
+				}
+
+				td:nth-child(2) {
+					width: 90%;
+					text-align: left !important;
+				}
+				td:nth-child(3) {
+					border-right: 1px solid @border-color;
+					width: 5%;
+				}
+			}
+		}
+	}
+
+	.fake-border {
+		width: 99.4%;
+		margin: 0 auto;
+		position: relative;
+		bottom: 1px;
+	}
+}
+
+/* ==========================================================================
+   Student Page Styles
+   ========================================================================== */
+.start-activity-wrapper {
+	button {
+		float: right;
+	}
+}
+
+.student-page {
+	.section-header {
+		margin-bottom: 30px;
+	}
+}
+
+
+
+/* ==========================================================================
+   Class Manager
+   ========================================================================== */
+
+.manage-classes{
+	table {
+		margin-top: 20px;
+		border-collapse: separate;
+		margin-bottom: 0;
+		a {
+			color: @aquamarine-color;
+		}
+		thead {
+			background: @thead-bg;
+			border: 1px solid @border-color;
+			tr {
+				th {
+					border-bottom: none;
+					border-top: 1px solid @border-color !important;
+					cursor: pointer;
+					background-color: @fake-table-header-bg;
+					padding: @fake-table-header-padding - 4 @fake-table-padding-left;
+					.transition-mixin();
+
+					.fa {
+						float: right;
+						.fa-caret-mixin();
+					}
+
+					&.active {
+						background: #e6e6e6;
+					}
+				}
+
+				th:nth-child(1) {
+					width: 40%;
+					border-top-left-radius: 5px;
+					text-align: left;
+					border-left: 1px solid @border-color;
+				}
+
+				th:nth-child(2) {
+					width: 12%;
+					text-align: center;
+				}
+
+				th:nth-child(3) {
+					width: 23%;
+					text-align: center;
+				}
+
+				th:nth-child(4) {
+					width: 25%;
+					border-top-right-radius: 5px;
+					border-right: 1px solid @border-color;
+				}
+			}
+		}
+
+		tbody {
+			
+			tr {
+				background: @thead-bg;
+				td {
+					font-size: 14px;
+					padding: @fake-table-header-padding + 8 @fake-table-padding-left;
+				}
+				td:nth-child(1) {
+					text-align: left;
+					border-left: 1px solid @border-color;
+				}
+
+				td:nth-child(2) {
+					text-align: center;
+				}
+
+				td:nth-child(3) {
+					text-align: center;
+				}
+
+				td:nth-child(4) {
+					text-align: right;
+					border-right: 1px solid @border-color;
+				}
+
+				&:last-child {
+					td {
+						border-bottom: 1px solid @border-color;
+						&:first-child {
+							border-bottom-left-radius: 5px;
+						}
+
+						&:last-child {
+							border-bottom-right-radius: 5px;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.table > thead > tr > th,
+	.table > tbody > tr > th,
+	.table > tfoot > tr > th,
+	.table > thead > tr > td,
+	.table > tbody > tr > td,
+	.table > tfoot > tr > td {
+		vertical-align: middle;
+	}
+}
+
+/* ==========================================================================
+   Class Page
+   ========================================================================== */
+
+
+.class-page{
+	table {
+		margin-top: 20px;
+		border-collapse: separate;
+		margin-bottom: 0;
+		a {
+			color: @aquamarine-color;
+		}
+		thead {
+			background: @thead-bg;
+			border: 1px solid @border-color;
+			tr {
+				th {
+					border-bottom: none;
+					border-top: 1px solid @border-color !important;
+					cursor: pointer;
+					background-color: @fake-table-header-bg;
+					padding: @fake-table-header-padding - 4 @fake-table-padding-left;
+					.transition-mixin();
+
+					.fa {
+						float: right;
+						.fa-caret-mixin();
+					}
+
+					&.active {
+						background: #e6e6e6;
+					}
+				}
+
+				th:nth-child(1) {
+					width: 40%;
+					border-top-left-radius: 5px;
+					text-align: left;
+					border-left: 1px solid @border-color;
+				}
+
+				th:nth-child(2) {
+					width: 40%;
+					text-align: left;
+				}
+
+				th:nth-child(3) {
+					width: 20%;
+					text-align: center;
+					border-top-right-radius: 5px;
+					border-right: 1px solid @border-color;
+				}
+			}
+		}
+
+		tbody {
+			
+			tr {
+				background: @thead-bg;
+				td {
+					font-size: 14px;
+					padding: @fake-table-header-padding + 8 @fake-table-padding-left;
+				}
+				td:nth-child(1) {
+					text-align: left;
+					border-left: 1px solid @border-color;
+				}
+
+				td:nth-child(2) {
+					text-align: left;
+				}
+
+				td:nth-child(3) {
+					text-align: right;
+					border-right: 1px solid @border-color;
+				}
+
+				&:last-child {
+					td {
+						border-bottom: 1px solid @border-color;
+						&:first-child {
+							border-bottom-left-radius: 5px;
+						}
+
+						&:last-child {
+							border-bottom-right-radius: 5px;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.table > thead > tr > th,
+	.table > tbody > tr > th,
+	.table > tfoot > tr > th,
+	.table > thead > tr > td,
+	.table > tbody > tr > td,
+	.table > tfoot > tr > td {
+		vertical-align: middle;
+	}
+
+	input {
+		width: 300px;
+		margin: 0 20px;
+	}
+
+	.delete-class {
+		a {
+			color: @aquamarine-color;
+			line-height: 50.5px;
+		}
+	}
+}
+
+.edit-student-page {
+	width: 380px;
+	overflow: hidden;
+	position: relative;
+
+	a {
+		color: @aquamarine-color;
+	}
+
+	> div {
+		margin-bottom: 20px;
+	}
+
+	.first-div {
+		margin-top: 25px;
+	}
+
+	.last-div {
+		margin-bottom: 10px;
+	}
+
+	.second-part {
+		width: 280px;
+		float: right;
+	}
+
+	.input-description-inline {
+		line-height: 40px;
+	}
+
+	.input-description {
+		color: #b3b3b3;
+		font-size: 12px;
+	}
+
+	.password-reset {
+		position: absolute;
+		right: 110px;
+		bottom: 235px;
+	}
+}
+
+
+.invite-students {
+	.select-white-wrapper {
+		.dropdown-menu {
+			left: auto;
+			width: 280px;
+			top: auto;
+		}
+	}
+
+	h1 {
+		margin-top: 30px;
+		margin-bottom: 20px;
+	}
+
+	ol {
+		padding-left: 20px;
+	}
+
+	input, .class-code {
+		margin-right: 20px;
+	}
+
+	table {
+			margin-top: 20px;
+			border-collapse: separate;
+			margin-bottom: 0;
+			a {
+				color: @aquamarine-color;
+			}
+			thead {
+				background: @thead-bg;
+				border: 1px solid @border-color;
+				tr {
+					th {
+						border-bottom: none;
+						border-top: 1px solid @border-color !important;
+						cursor: pointer;
+						background-color: @fake-table-header-bg;
+						padding: @fake-table-header-padding - 4 @fake-table-padding-left;
+						.transition-mixin();
+
+						.fa {
+							float: right;
+							.fa-caret-mixin();
+						}
+
+						&.active {
+							background: #e6e6e6;
+						}
+					}
+
+					th:nth-child(1) {
+						width: 30%;
+						border-top-left-radius: 5px;
+						text-align: left;
+						border-left: 1px solid @border-color;
+					}
+
+					th:nth-child(2) {
+						width: 30%;
+						text-align: left;
+					}
+
+					th:nth-child(3) {
+						width: 40%;
+						text-align: left;
+						border-top-right-radius: 5px;
+						border-right: 1px solid @border-color;
+					}
+				}
+			}
+
+			tbody {
+				
+				tr {
+					background: @thead-bg;
+					td {
+						font-size: 14px;
+						padding: @fake-table-header-padding + 8 @fake-table-padding-left;
+					}
+					td:nth-child(1) {
+						text-align: left;
+						border-left: 1px solid @border-color;
+					}
+
+					td:nth-child(2) {
+						text-align: left;
+					}
+
+					td:nth-child(3) {
+						text-align: left;
+						border-right: 1px solid @border-color;
+					}
+
+					&:last-child {
+						td {
+							border-bottom: 1px solid @border-color;
+							&:first-child {
+								border-bottom-left-radius: 5px;
+							}
+
+							&:last-child {
+								border-bottom-right-radius: 5px;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		.table > thead > tr > th,
+		.table > tbody > tr > th,
+		.table > tfoot > tr > th,
+		.table > thead > tr > td,
+		.table > tbody > tr > td,
+		.table > tfoot > tr > td {
+			vertical-align: middle;
+		}
+
+}
+
+.create-a-class {
+	h1 {
+		margin-bottom: 20px;
+	}
+
+	> div {
+		margin-bottom: 20px;
+	}
+
+	input:not(.inactive) {
+		width: 315px;
+	}
+
+	a {
+		color: @aquamarine-color;
+	}
+
+	.select-gray-wrapper {
+		width: 180px;
+
+		.dropdown-menu {
+			width: 180px !important;
+			left: auto;
+			top: auto;
+		}
+	}
+
+	.class-code-wrapper {
+		div {
+			margin-bottom: 10px;
+		}
+
+		span {
+			margin-left: 15px;
+		}
+	}
+}
+
+.grade-select {
+	.selecter-selected {
+		background-color: @select-gray-bg;
+		width: 140px;
+		max-width: 140px;
+	}
+	
+	.selecter-options {
+		max-width: 140px;
+	}
+}   
+
+/* ==========================================================================
+   Fake table styles
+   ========================================================================== */
+
+.fake-table {
+	border: 1px solid @border-color;
+	border-radius: 5px;
+	margin-bottom: 20px;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	.header {
+		background-color: @fake-table-header-bg;
+		padding: @fake-table-header-padding @fake-table-padding-left;
+		color: #000;
+		font-weight: bold;
+	}
+
+	.line {
+		padding: @fake-table-line-padding @fake-table-padding-left;
+		border-bottom: 1px solid @border-color;
+
+		&:last-child {
+			border-bottom: 0;
+		}
+
+		a {
+			color: @aquamarine-color;
+		}
+	}
+
+	a {
+		float: right;
+		line-height: @icon-size;
+	}
+
+	.header-list-counter {
+		color: #aeaeae;
+		float: right;
+		font-size: 14px;
+		font-weight: normal;
+	}
+}
+
+/* ==========================================================================
+   Pagination
+   ========================================================================== */
+
+.pagination {
+	margin: 0;
+
+	.fa {
+		.fa-caret-mixin();
+	}
+}
+
+
+/* ==========================================================================
+   Panel styles
+   ========================================================================== */
+
+.panel-group .panel {
+	margin-bottom: 20px;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.panel-default {
+
+	&:first-child {
+		margin-top: 20px;
+	}
+}
+
+.panel-body {
+	.row {
+		margin-bottom: 20px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	input[type=checkbox].css-checkbox + label.css-label {
+		font-size: 14px;
+		font-weight: normal;
+	}
+
+}
+
+.panel-heading {
+	
+	input[type=checkbox].css-checkbox + label.css-label {
+		font-size: 14px;
+		margin-top: 7px;
+	}
+
+	.panel-select-by-student {
+		line-height: 40px;
+		width: 150px;
+	}
+
+	.title {
+		a {
+			margin-bottom: 7px;
+		}
+	}
+}
+
+.ph-caret-up {
+	background-image: url(../images/caret-up.png);
+	background-repeat: no-repeat;
+	background-position-x: 130px;
+	background-position-y: 14px;
+}
+
+.ph-caret-down {
+	background-image: url(../images/caret-down.png);
+	background-repeat: no-repeat;
+	background-position-x: 130px;
+	background-position-y: 14px;
+}
+
+
+
+.assign-dates {
+	
+	padding-bottom: 80px;
+
+	table {
+		margin-top: 20px;
+		border-collapse: separate;
+		margin-bottom: 0;
+		tbody {
+			background: @thead-bg;
+			border: 1px solid @border-color;
+			tr {
+				
+				&:first-child {
+					td {
+						&:first-child {
+							border-top-left-radius: 5px;
+						}
+
+						&:last-child {
+							border-top-right-radius: 5px;
+						}
+					}
+				}
+
+				&:last-child {
+					td {
+						border-bottom: 1px solid @border-color;
+						&:first-child {
+							border-bottom-left-radius: 5px;
+						}
+
+						&:last-child {
+							border-bottom-right-radius: 5px;
+						}
+					}
+				}
+
+				th {
+					border-left: 1px solid @border-color;
+					border-bottom: none;
+					border-top: 1px solid @border-color;
+					cursor: pointer;
+					.transition-mixin();
+
+					.fa {
+						float: right;
+						.fa-caret-mixin();
+					}
+
+					&.active {
+						background: #e6e6e6;
+					}
+				}
+
+				td:nth-child(1) {
+					width: 5%;
+					text-align: center;
+				}
+
+				td:nth-child(2) {
+					width: 80%;
+					text-align: left;
+				}
+
+				td:nth-child(3) {
+					width: 10%;
+				}
+
+				td:nth-child(4) {
+					width: 5%;
+					border-right: 1px solid @border-color;
+				}
+			}
+		}
+
+		tbody {
+
+			tr {
+			
+				background: @thead-bg;
+				td {
+					font-size: 14px;
+					padding: 7px; 
+				}
+				td:nth-child(1) {
+					text-align: center;
+					border-left: 1px solid @border-color;
+				}
+
+				td:nth-child(2) {
+					text-align: left;
+				}
+
+				td:nth-child(3) {
+					text-align: left;
+				}
+
+				td:nth-child(4) {
+					text-align: right;
+				}
+			}
+		}
+	}
+
+	.table > thead > tr > th,
+	.table > tbody > tr > th,
+	.table > tfoot > tr > th,
+	.table > thead > tr > td,
+	.table > tbody > tr > td,
+	.table > tfoot > tr > td {
+		vertical-align: middle;
+	}
+
+	button {
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+}
+
+
+//Datepicker
+
+
+
+
+
+
+
+/* ==========================================================================
+   Tooltips
+   ========================================================================== */
+
 
 .tooltip.in {
 	opacity: 1;
 }
 
 
-//Helpers
+/* ==========================================================================
+   Helper styles to quickly manipulate the looks
+   ========================================================================== */
 
+.fake-border {
+	border-top: 1px solid @border-color;
+}
+.no-border {
+	border: none;
+}   
+
+.text-right {
+	text-align: right;
+}
+
+.m-20 {
+	margin: 20px 0;
+}
+
+.mt-15 {
+	margin-top: 15px;
+}
 .no-pl {
 	padding-left: 0;
 }
@@ -231,3 +1749,5 @@ select {
 .no-pr {
 	padding-right: 0;
 }
+
+//Footer

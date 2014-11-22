@@ -1,127 +1,73 @@
-# [Bootstrap](http://getbootstrap.com)
-[![Bower version](https://badge.fury.io/bo/bootstrap.svg)](http://badge.fury.io/bo/bootstrap)
-[![NPM version](https://badge.fury.io/js/bootstrap.svg)](http://badge.fury.io/js/bootstrap)
-[![Build Status](https://secure.travis-ci.org/twbs/bootstrap.svg?branch=master)](http://travis-ci.org/twbs/bootstrap)
-[![devDependency Status](https://david-dm.org/twbs/bootstrap/dev-status.svg)](https://david-dm.org/twbs/bootstrap#info=devDependencies)
-[![Selenium Test Status](https://saucelabs.com/browser-matrix/bootstrap.svg)](https://saucelabs.com/u/bootstrap)
+### Issues list for Josh / 29.10.2014
 
-Bootstrap is a sleek, intuitive, and powerful front-end framework for faster and easier web development, created by [Mark Otto](http://twitter.com/mdo) and [Jacob Thornton](http://twitter.com/fat), and maintained by the [core team](https://github.com/twbs?tab=members) with the massive support and involvement of the community.
+#### New
 
-To get started, check out <http://getbootstrap.com>!
+* The file is named ```activity-planner-step-2.html```. I wanted to make it tabbed first, but then decided not to, since you had similar behaviour on other pages and may have already handeled it.
 
-## Table of contents
+* Checkboxes are not currently checkable. A checkbox requires a unique ID, and the label for it requires the same. Take a look at the Activity Planner page step 1 for reference. They are all clickable there. So I left it for you, maybe you have a quick way to assign unique IDs for ```input``` and ```label```
 
- - [Quick start](#quick-start)
- - [Bugs and feature requests](#bugs-and-feature-requests)
- - [Documentation](#documentation)
- - [Contributing](#contributing)
- - [Community](#community)
- - [Versioning](#versioning)
- - [Creators](#creators)
- - [Copyright and license](#copyright-and-license)
+* I will add the caret manipulation on click tomorrow alongside with the datepicker and green button.
 
-## Quick start
 
-Three quick start options are available:
+### A quick how to on how to work with this repo
 
-- [Download the latest release](https://github.com/twbs/bootstrap/archive/v3.2.0.zip).
-- Clone the repo: `git clone https://github.com/twbs/bootstrap.git`.
-- Install with [Bower](http://bower.io): `bower install bootstrap`.
+#### GruntJS
 
-Read the [Getting started page](http://getbootstrap.com/getting-started/) for information on the framework contents, templates and examples, and more.
-
-### What's included
-
-Within the download you'll find the following directories and files, logically grouping common assets and providing both compiled and minified variations. You'll see something like this:
+First, you need to install the <a href="http://gruntjs.com">Grunt JS</a>, run:
 
 ```
-bootstrap/
-├── css/
-│   ├── bootstrap.css
-│   ├── bootstrap.min.css
-│   ├── bootstrap-theme.css
-│   └── bootstrap-theme.min.css
-├── js/
-│   ├── bootstrap.js
-│   └── bootstrap.min.js
-└── fonts/
-    ├── glyphicons-halflings-regular.eot
-    ├── glyphicons-halflings-regular.svg
-    ├── glyphicons-halflings-regular.ttf
-    └── glyphicons-halflings-regular.woff
+npm install -g grunt-cli
+
 ```
 
-We provide compiled CSS and JS (`bootstrap.*`), as well as compiled and minified CSS and JS (`bootstrap.min.*`). Fonts from Glyphicons are included, as is the optional Bootstrap theme.
+After that:
+
+* Head over to the repo's root directory.
+* Install the GruntJS's dependencies with ```npm install```
+* Run Grunt with ```grunt```
+
+That is basically all. You are ready to work with the current setup.
+
+#### Explanation of folder and project structure
+
+
+#### Working with HTML
+
+The HTML compile from root and ````/includes``` folders automatically each time you change and save something in any .html file that lies either in root or in ```/includes``` folder. You may want to test it, type something in any root .html file, save it, and in the command line you'll see the information on that change.
+
+**NOTE**
+
+Any changes you make in the build folder will always be overriden each time you save any .HTML file outside the /build folder.
+
+File in the ```/build``` folder takes a name of the corresponding HTML file from the root folder.
 
 
 
-## Bugs and feature requests
+##### Purpose of /includes folder.
 
-Have a bug or a feature request? Please first read the [issue guidelines](https://github.com/twbs/bootstrap/blob/master/CONTRIBUTING.md#using-the-issue-tracker) and search for existing and closed issues. If your problem or idea is not addressed yet, [please open a new issue](https://github.com/twbs/bootstrap/issues/new).
+In any HTML file that lies in the root folder, you will find something like that: ```@@include('includes/foo.html')```. Basically what it does is inserting the contents of the ```includes/foo.html``` file in the corresponding place in the file you've used it with.
 
+That is very useful for items that repeat for all the pages, for example ```<head>``` for styles, ```<footer>``` (for footer ? :-D), and stuff like ```navbars```.
 
-## Documentation
+**Example**:
 
-Bootstrap's documentation, included in this repo in the root directory, is built with [Jekyll](http://jekyllrb.com) and publicly hosted on GitHub Pages at <http://getbootstrap.com>. The docs may also be run locally.
+There's a ```foo.html``` file in the root folder, you make 2 includes there: ```bar.html``` and ```bar2.html```. 
 
-### Running documentation locally
+* Contents of the ```bar.html``` will be "My"
+* Contents of ```bar2.html``` will be "Name"
+* And in the root file itself you write "is Username"
 
-1. If necessary, [install Jekyll](http://jekyllrb.com/docs/installation) (requires v2.0.x).
-  - **Windows users:** Read [this unofficial guide](https://github.com/juthilo/run-jekyll-on-windows/) to get Jekyll up and running without problems. We use Pygments for syntax highlighting, so make sure to read the sections on installing Python and Pygments.
-2. From the root `/bootstrap` directory, run `jekyll serve` in the command line.
-3. Open <http://localhost:9001> in your browser, and voilà.
-
-Learn more about using Jekyll by reading its [documentation](http://jekyllrb.com/docs/home/).
-
-### Documentation for previous releases
-
-Documentation for v2.3.2 has been made available for the time being at <http://getbootstrap.com/2.3.2/> while folks transition to Bootstrap 3.
-
-[Previous releases](https://github.com/twbs/bootstrap/releases) and their documentation are also available for download.
+and the output content of the ```build/foo.html``` will be *"My Name is Username"*.
 
 
 
-## Contributing
 
-Please read through our [contributing guidelines](https://github.com/twbs/bootstrap/blob/master/CONTRIBUTING.md). Included are directions for opening issues, coding standards, and notes on development.
+#### Working with LESS, CSS
 
-Moreover, if your pull request contains JavaScript patches or features, you must include relevant unit tests. All HTML and CSS should conform to the [Code Guide](http://github.com/mdo/code-guide), maintained by [Mark Otto](http://github.com/mdo).
+Same saving and compiling rules applied to LESS compilation. Each time you change and save any file that lies in the sources```/less``` folder, all the files compile in one CSS file that is in the ```build/css/*.css``` folder.
 
-Editor preferences are available in the [editor config](https://github.com/twbs/bootstrap/blob/master/.editorconfig) for easy use in common text editors. Read more and download plugins at <http://editorconfig.org>.
+From the ```Gruntfile.js``` you will see, that the default Bootstrap's styles are compiled to ```build/css/bootstrap.css```, and the custom project styles are compiled to the ```custom.css``` file respectively.
 
-
-
-## Community
-
-Keep track of development and community news.
-
-- Follow [@twbootstrap on Twitter](http://twitter.com/twbootstrap).
-- Read and subscribe to [The Official Bootstrap Blog](http://blog.getbootstrap.com).
-- Chat with fellow Bootstrappers in IRC. On the `irc.freenode.net` server, in the `##twitter-bootstrap` channel.
-- Implementation help may be found at Stack Overflow (tagged [`twitter-bootstrap-3`](http://stackoverflow.com/questions/tagged/twitter-bootstrap-3)).
+*Believe that's all. Have a nice day*
 
 
-
-## Versioning
-
-For transparency into our release cycle and in striving to maintain backward compatibility, Bootstrap is maintained under [the Semantic Versioning guidelines](http://semver.org/). Sometimes we screw up, but we'll adhere to those rules whenever possible.
-
-
-
-## Creators
-
-**Mark Otto**
-
-- <http://twitter.com/mdo>
-- <http://github.com/mdo>
-
-**Jacob Thornton**
-
-- <http://twitter.com/fat>
-- <http://github.com/fat>
-
-
-
-## Copyright and license
-
-Code and documentation copyright 2011-2014 Twitter, Inc. Code released under [the MIT license](LICENSE). Docs released under [Creative Commons](docs/LICENSE).

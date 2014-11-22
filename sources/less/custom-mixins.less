@@ -17,19 +17,59 @@
 
 //Inputs mixins
 
-//Select mixins
-
-.select-mixin {
-	padding: @select-padding;
+.input-mixin {
 	border-radius: 5px;
 	border: 1px solid @border-color;
 	color: #000;
 	font-size: @tab-subnavigation-a-font-size;
-	width: 100%;
+	padding: 9px 12px;
 }
 
+//Select mixins
+
+.select-mixin {
+	border-radius: 5px;
+	border: 1px solid @border-color;
+	color: #000;
+	font-size: @tab-subnavigation-a-font-size;
+	padding: 9px 14px;
+}
+
+
+
 .icon-wrapper-mixin {
-	width: 33px;
-	height: 33px;
+	width: @icon-size;
+	height: @icon-size;
 	border-radius: 4px;
+}
+
+//Checkboxes mixins
+
+.checkbox-mixin {
+	height: @checkbox-size;
+	width: @checkbox-size;
+	border-radius: 5px;
+	background: @checkbox-bg;
+	.border-mixin();
+}
+
+//Button mixin
+.button-mixin {
+	padding: @button-padding;
+	font-size: @button-font-size;
+	border-radius: 5px;
+}
+
+.fa-caret-mixin {
+	color: @gray-color;
+	font-size: 1.3em;
+}
+
+//Transition mixin 
+
+.transition-mixin {
+
+	        transition: 0.10s ease-out;
+	   -moz-transition: 0.10s ease-out;
+	-webkit-transition: 0.10s ease-out;
 }

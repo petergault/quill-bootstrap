@@ -11,30 +11,43 @@
 						<div class="container">	
 
 							<ul class="nav nav-tabs tabs-navigation-list" role="tablist">
-							  <li class="active"><a href="#home" id="first-tab" role="tab" data-toggle="tab">Home</a></li>
-							  <li><a href="#profile" role="tab" data-toggle="tab">Profile</a></li>
-							  <li><a href="#messages" role="tab" data-toggle="tab">Messages</a></li>
-							  <li><a href="#settings" role="tab" data-toggle="tab">Settings</a></li>
+
+								<li class="active">
+									<a href="#scorebook" role="tab" data-toggle="tab">Scorebook</a>
+								</li>
+
+								<li>
+									<a href="#portfolio" role="tab" data-toggle="tab">Portfolio</a>
+								</li>
+
+								<li>
+									<a href="#activity-planner" role="tab" data-toggle="tab">Activity Planner</a>
+								</li>
+
+								<li>
+									<a href="#class-manager" role="tab" data-toggle="tab">Class Manager</a>
+								</li>
+
 							</ul>
 
-						</div>	
+						</div> <!-- //.container -->	
 
 							<!-- Tab panes -->
 							<div class="tab-content">
-							
+
 								@@include('includes/first-tab.html')  
 
 								@@include('includes/second-tab.html') 
 								
-								@@include('includes/third-tab.html')
+								@@include('includes/activity-planner.html')
 
-								@@include('includes/fourth-tab.html')
-								
-							</div>
+								@@include('includes/class-manager_class-page.html')	
+
+							</div> <!-- //.tab-content -->
 								
 							 
-					</div>
-				</div>
+					</div> <!-- //.col-xs-12-->
+				</div> <!-- //.row -->
 
 
 			</div> <!-- //#page-content-wrapper -->
